@@ -28,8 +28,9 @@ Wifi-Cracker.py it Saves Time and Effort
 
 #Installation
 1) sudo apt-get update && apt-get install git
-2) sudo git clone https://github.com/Hacker-EG/Wifi-Cracker.py
-3) sudo python3 wifi-cracker.py
+2) sudo git clone https://github.com/Hacker-EG/Wifi-Cracker.git
+3) cd Wifi-Cracker/
+4) sudo python3 wifi-cracker.py
 # Auther
 (Hacker-EG)
 
