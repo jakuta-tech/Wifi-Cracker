@@ -64,6 +64,7 @@ def intro():
         print("\nWhen Done Press CTRL+c")
         print("\nNote: Under Probe it might be Passwords So copy them to the worlist file")
         print("\nDon't Attack The Network if its Data is ZERO (you waste your time)")
+        print("\nyou Can use 's' to arrange networks")
         cmd       = os.system("sleep 5")
         geny      = os.system(order)
         print("\nEnter the bssid of the network?")
